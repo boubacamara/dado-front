@@ -1,0 +1,390 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #1c1f25;
+    color: #d3d3d3;
+  }
+  
+  /* Pour les navigateurs WebKit (Chrome, Safari) */
+  html, body, .container-fluid ::-webkit-scrollbar {
+    visibility: hidden;
+    width: 8px;
+  }
+  
+  html, body, .container-fluid ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  
+  html, body, .container-fluid ::-webkit-scrollbar-thumb {
+    width: 8px;
+  }
+  
+  
+  /* Conteneur principal */
+  .container-fluid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: 100vh;
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  /* Section gauche */
+  .gauche {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 78% 10%;
+    padding: 1rem;
+    gap: 10px;
+    background: #3a3f47;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .header {
+    padding: 10px;
+    background: #444b55;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  footer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 57% 18%;
+    grid-template-rows: 100%;
+    padding: 10px;
+    background: #444b55;
+    border-radius: 8px;
+  }
+  
+  footer .boutton{
+    display: grid;
+    place-items: center;
+    width: 50px;
+    min-width: 20px;
+    padding: 10px;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 550;
+    background: #3a3f47;
+    color: #fff;
+  }
+  
+  
+  footer .leaveCallButton{
+    background: rgb(238, 0, 0);
+  }
+  
+  
+  footer .optionGauche{
+    display: grid;
+    place-items: start;
+  }
+  
+  footer .optionCentre{
+    width: 80%;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 100%;
+  }
+  
+  footer .optionDroite{
+    display: grid;
+    place-items: end;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+  }
+  
+  .header .meeting-info {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 100%;
+  }
+  
+  .header .icone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #3498db;
+    color: white;
+    font-size: 24px;
+  }
+  
+  .header .meeting-details {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 40% 60%;
+  }
+  
+  .header .date {
+    color: #bdc3c7;
+    font-size: 14px;
+  }
+  
+  .header .autre {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: 100%;
+  }
+  
+  .header .nomSalon {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .header .param {
+    display: grid;
+    place-items: center;
+    align-items: center;
+    background: none;
+    border: 1px solid none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .video__main {
+    width: 100%;
+    height:100%;
+    display: grid;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow-y: hidden;
+  }
+  
+  .video__sidebar {
+    height: 100%;
+    position: absolute;
+    right: 5px;
+    display: grid;
+    grid-template-rows: repeat(4, minmax(auto, 1fr));
+    gap: 10px;
+    padding-top: 10px;
+    overflow-y: auto;
+    z-index: 3;
+  }
+  
+  .video__sidebar .participant{
+    width: 180px;
+    height: 100px;
+    border-radius: 8px;
+    position: relative;
+    overflow-y: hidden;
+  }
+  
+  .video__sidebar .participant video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    border-radius: 8px;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Section droite */
+  .droite {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background: #3a3f47;
+    border-radius: 8px;
+    padding: 1rem;
+    gap: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .chat__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+  }
+  
+  .chat__tabs {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .chat__tabs button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+  }
+  
+  .chat__tabs button.active {
+    background: #3498db;
+    border-radius: 0.5rem;
+  }
+  
+  .close-chat {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .chat {
+    max-height: 400px;
+    min-height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    background: #444b55;
+    border-radius: 8px;
+  }
+  
+  .message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  .message .profilUser .photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgb(224, 215, 215); 
+    border: solid 1px #E0DCDC;
+  }
+  
+  /* Assure que la photo de profil couvre tout l'espace disponible */
+  .message .profilUser .photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Maintient l'aspect circulaire */
+  }
+  
+  .message__content {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    background: white;
+    padding: 8px;
+    padding-top: 4px;
+    border-radius: 5px;
+    width: auto;;
+  }
+  
+  .message__content span {
+    display: block;
+    font-size: 0.8rem;
+    color: #3498db;
+    margin-bottom: 0.3rem;
+  }
+  
+  .message__content .nomUser{
+    display: flex;
+    justify-content: end;
+    font-weight: bold;
+  }
+  
+  .message.self .message__content {
+    background: #4a5366;
+  }
+  
+  .chat__input {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #444b55;
+    border-radius: 8px;
+  }
+  
+  .chat__input input {
+    flex-grow: 1;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    background: #4a4f57;
+    color: #fff;
+  }
+  
+  .chat__input button {
+    background: #3498db;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  
+  @keyframes slideUp {
+    from {
+      transform: translate(-50%, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, -100vh);
+      opacity: 1;
+    }
+  }
+  
+  .alert {
+    display: none; 
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    animation: slideUp 1.8s ease-in-out;
+    z-index: 1000;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; 
+  }
+  
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+  }
+  
+  .modal-buttons button {
+    margin: 0 10px;
+  }

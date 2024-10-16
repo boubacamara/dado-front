@@ -6,7 +6,7 @@ import { inject, Injectable } from '@angular/core';
 })
 export class CategorieService {
 
-  private url:string = 'http://localhost:8000/api/';
+  private url:string = 'https://192.168.1.46:8000/api/';
   private http = inject(HttpClient);
 
   recuperer(id:number) {

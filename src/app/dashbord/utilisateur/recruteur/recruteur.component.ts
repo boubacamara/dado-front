@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { OffreService } from '../../../services/offre.service';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../../pipes/filter.pipe';
+import { UtilisateurService } from '../../../services/utilisateur.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -28,9 +29,12 @@ export class RecruteurComponent implements OnInit, AfterViewInit{
   offres:any[] = [];
   rechercher:string = '';
   candidats:any[] = [];
+  utilisateurSRV = inject(UtilisateurService);
+  utilisateur:any = {};
 
   ngOnInit(): void {
     this.recuperOffres();
+    console.log('yoooooooooooooo',this.utilisateurSRV);
   }
 
   ngAfterViewInit(): void {
@@ -54,6 +58,16 @@ export class RecruteurComponent implements OnInit, AfterViewInit{
         this.candidats = res.candidat;
         console.log(res)
       }
+    })
+  }
+
+  private recuperUtilisateur() {
+    this.utilisateurSRV.recuperer().subscribe({
+      next: (reponse )=> {
+        this.utilisateur = reponse;
+        console.log(reponse)
+      },
+      error: (erreurs) => console.log(erreurs)
     })
   }
 

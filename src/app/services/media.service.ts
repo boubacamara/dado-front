@@ -6,7 +6,7 @@ import { inject, Injectable } from '@angular/core';
 })
 export class MediaService {
   
-  private uri:string = 'http://localhost:8000/api/';
+  private uri:string = 'https://192.168.1.46:8000/api/';
   private http = inject(HttpClient);
 
   chargerCv(file:any) {

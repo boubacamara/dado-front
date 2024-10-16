@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../../pipes/filter.pipe';
 import { Router, RouterModule } from '@angular/router';
 
+
 declare const M:any;
 
 @Component({

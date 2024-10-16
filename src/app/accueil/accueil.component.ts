@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { CommonModule } from '@angular/common';
 import { OffreService } from '../services/offre.service';
-import { FilterPipe } from '../pipes/filter.pipe';
 import { FilterPosteLieuPipe } from '../pipes/filter-poste-lieu.pipe';
 
 @Component({

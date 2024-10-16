@@ -1,0 +1,111 @@
+<section class="container-fluid m-0">
+    <div class="gauche">
+      <header class="header">
+        <div class="meeting-info">
+          <div class="icone">
+            <i class="fas fa-video"></i>
+          </div>
+          <div class="meeting-details">
+            <span class="date">{{ currentDate }}</span>
+            <div class="autre">
+              <span class="nomSalon">{{salonName}}</span>
+              <div class="param"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+          </div>
+        </div>
+      </header>
+  
+      <main>
+        <div class="video__main">
+          <div #videoGrid class="video-grid">
+          </div>
+  
+          <div class="video__sidebar" *ngIf="(participantVideos$ | async)?.length ?? 0 > 0">
+            <div class="participant" *ngFor="let participant of participantVideos$ | async">
+              <video [attr.id]="participant.id" [srcObject]="participant.stream" autoplay></video>
+            </div>
+          </div>
+        </div>
+      </main>
+  
+      <footer>
+        <div class="optionGauche">
+          <button class="boutton" #copyButton>
+            <i class="fa-solid fa-copy"></i>
+          </button>
+        </div>
+  
+        <div class="optionCentre">
+          <button class="boutton" #muteButton>
+            <i class="fa fa-microphone"></i>
+          </button>
+          <button class="boutton" #stopVideo>
+            <i class="fa fa-video-camera"></i>
+          </button>
+          <button class="boutton" #screenShareButton>
+            <i class="fas fa-desktop"></i>
+          </button>
+          <button class="boutton" #raiseHandButton>
+            <i class="fas fa-hand-paper"></i>
+          </button>
+          <button class="boutton leaveCallButton" #leaveCallButton>
+            <i class="fas fa-phone-slash"></i>
+          </button>
+        </div>
+  
+        <div class="optionDroite">
+          <button class="boutton" #showChat>
+            <i class="fa fa-comment"></i>
+          </button>
+          <button class="boutton" #inviteButton>
+            <i class="fas fa-user-plus"></i>
+          </button>
+        </div>
+      </footer>
+    </div>
+  
+    <div class="droite">
+      <div class="chat__header">
+        <div class="chat__tabs">
+          <button class="active">Chat</button>
+          <button>Participants</button>
+        </div>
+        <button class="close-chat"><i class="fas fa-times"></i></button>
+      </div>
+  
+      <div class="chat" #messages>
+        <div *ngFor="let msg of msgs" class="message">
+          <div class="message__content">
+            <span class="nomUser">{{ msg.userName === 'undefined' ? 'Anonymous' : msg.userName }}</span>
+            <span class="contenu">
+              {{ msg.message }}
+            </span>
+          </div>
+          <div class="profilUser">
+            <div class="photo">
+              <img [src]="msg.userImg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="chat__input">
+        <input type="text" placeholder="Type message here..." #text>
+        <button #send><i class="fa fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </section>
+  
+  <div class="alert"></div>
+  
+  
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Confirmation</h2>
+      <p>Voulez-vous vraiment quitter ce salon ?</p>
+      <div class="modal-buttons">
+        <button (click)="closeSalon()">Oui</button>
+        <button (click)="onClose()">Non</button>
+      </div>
+    </div>
+  </div>

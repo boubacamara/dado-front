@@ -18,9 +18,13 @@ import { OffreAjouterComponent } from './dashbord/offres/offre-ajouter/offre-ajo
 import { OffreListeComponent } from './dashbord/offres/offre-liste/offre-liste.component';
 import { EntrepriseAjouterComponent } from './dashbord/entreprises/entreprise-ajouter/entreprise-ajouter.component';
 import { EntrepriseModifierComponent } from './dashbord/entreprises/entreprise-modifier/entreprise-modifier.component';
+import { EntretienComponent } from './dashbord/utilisateur/entretien/entretien.component';
+import { CreateMeetingComponent } from './dashbord/utilisateur/create-meeting/create-meeting.component';
+
 import { authGuard } from './guards/auth.guard';
 import { AfficherCurriculumComponent } from './dashbord/utilisateur/afficher-curriculum/afficher-curriculum.component';
 import { recruteurPermissionGuard } from './guards/recruteur-permission.guard';
+
 
 
 export const routes: Routes = [
@@ -30,6 +34,8 @@ export const routes: Routes = [
     {path: 'candidat/enregistrer', component: CandidatEnregistrerComponent},
     {path: 'connexion', component: ConnexionComponent},
     {path: 'offre/:id', component: OffreDetailComponent},
+    {path: 'entretien', component: EntretienComponent},
+    {path: 'reunion', component: CreateMeetingComponent},
 
     {path: 'dashbord', canActivate: [authGuard], component: Accueil},
     {path: 'profile/ajouter', component: ProfileAjouterComponent},
@@ -45,4 +51,5 @@ export const routes: Routes = [
     {path: 'utilisateur/offre/enregistrer', component: OffreAjouterComponent},
     {path: 'utilisateur/offres', component: OffreListeComponent},
     {path: 'candidat/:id/curriculum-vitae', canActivate:[recruteurPermissionGuard], component: AfficherCurriculumComponent}
+    
 ];

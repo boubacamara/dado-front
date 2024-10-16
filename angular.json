@@ -74,7 +74,15 @@
               "buildTarget": "front:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "host": "0.0.0.0",
+            "port": 4200,
+            "disableHostCheck": true,
+            "ssl": true,
+            "sslKey": "certs/cert.key",
+            "sslCert": "certs/cert.crt"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
@@ -102,5 +110,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

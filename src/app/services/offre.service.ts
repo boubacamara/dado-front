@@ -9,7 +9,7 @@ export class OffreService {
 
   private http = inject(HttpClient)
 
-  private uri:string =  'http://localhost:8000/api/';
+  private uri:string =  'https://192.168.1.46:8000/api/';
 
   enregistrerOffre(offreDonnees:any) {
     return this.http.post<any>(this.uri+'offre/enregistrer', offreDonnees)
