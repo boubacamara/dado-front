@@ -9,7 +9,7 @@ export class OffreService {
 
   private http = inject(HttpClient)
 
-  private uri:string =  'https://192.168.1.46:8000/api/';
+  private uri:string =  'https://192.168.1.7:8000/api/';
 
   enregistrerOffre(offreDonnees:any) {
     return this.http.post<any>(this.uri+'offre/enregistrer', offreDonnees)
@@ -29,8 +29,12 @@ export class OffreService {
     return this.http.get<any>(this.uri+'offre/recruteur/recuperers');
   }
 
-  modifierOffre(id:number, offreDonnees:any) {
-    return this.http.put<any>(this.uri+`offre/${id}/modifier`, offreDonnees)
+  modifierOffre(id: number, offreDonnees: any) {
+    return this.http.put<any>(`${this.uri}offre/${id}/modifier`, offreDonnees);
+  }
+
+  modifierCandidature(email: string, id: number, offre: any) {
+    return this.http.put<any>(`${this.uri}offre/${id}/modifierCandidature`, {email, offre});
   }
 
   supprimer(id:number) {

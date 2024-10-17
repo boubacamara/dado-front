@@ -29,12 +29,10 @@ export class RecruteurComponent implements OnInit, AfterViewInit{
   offres:any[] = [];
   rechercher:string = '';
   candidats:any[] = [];
-  utilisateurSRV = inject(UtilisateurService);
-  utilisateur:any = {};
+
 
   ngOnInit(): void {
     this.recuperOffres();
-    console.log('yoooooooooooooo',this.utilisateurSRV);
   }
 
   ngAfterViewInit(): void {
@@ -61,14 +59,38 @@ export class RecruteurComponent implements OnInit, AfterViewInit{
     })
   }
 
-  private recuperUtilisateur() {
-    this.utilisateurSRV.recuperer().subscribe({
-      next: (reponse )=> {
-        this.utilisateur = reponse;
-        console.log(reponse)
+  retenir(offre: any) {
+    // Changer le statut de l'offre à 'accepter'
+    offre.UtilisateurOffres.statut = 'accepter';
+    const email = offre.email;
+    
+    this.offreSRV.modifierCandidature(email, offre.UtilisateurOffres.offreId, offre.UtilisateurOffres).subscribe({
+      next: (rep: any) => {
+        // Afficher un message de succès
+        M.toast({html: rep.msg, classes: 'rounded green'});
       },
-      error: (erreurs) => console.log(erreurs)
-    })
+      error: (erreurs) => {
+        console.error(erreurs);
+        M.toast({html: 'Une erreur est survenue lors de la modification.', classes: 'rounded red'});
+      }
+    });
+  }
+
+  rejeter(offre: any) {
+    // Changer le statut de l'offre à 'accepter'
+    offre.UtilisateurOffres.statut = 'refuser';
+    const email = offre.email;
+    
+    this.offreSRV.modifierCandidature(email, offre.UtilisateurOffres.offreId, offre.UtilisateurOffres).subscribe({
+      next: (rep: any) => {
+        // Afficher un message de succès
+        M.toast({html: rep.msg, classes: 'rounded green'});
+      },
+      error: (erreurs) => {
+        console.error(erreurs);
+        M.toast({html: 'Une erreur est survenue lors de la modification.', classes: 'rounded red'});
+      }
+    });
   }
 
 }

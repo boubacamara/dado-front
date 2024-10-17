@@ -8,7 +8,7 @@ export class RoleService {
 
   private http = inject(HttpClient);
 
-  private url:string = 'https://192.168.1.46:8000/api/';
+  private url:string = 'https://192.168.1.7:8000/api/';
 
   recuperer(id:number) {
     return this.http.get<any[]>(this.url+`role/${id}/recuperer`);

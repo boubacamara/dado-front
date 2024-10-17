@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
     this.utilisateurSRV.recuperer().subscribe({
       next: (reponse) => {
         this.utilisateur = reponse;
+
         this.avatar = reponse.media.find((avatar:any) =>  avatar.type === 'avatar')
       },
       error: (erreurs) => console.log(erreurs.error)

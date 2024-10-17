@@ -1,31 +1,15 @@
-<div class="create-meeting-container">
+<section class="content">
+  <div class="create-meeting-container">
     <div class="header">
-      <img src="assets/video-conference.svg" alt="Conférence vidéo" class="header-img">
-      <h2>Créer ou rejoindre une réunion</h2>
+      <img src="https://cdn-icons-png.flaticon.com/512/3381/3381269.png" alt="Conférence vidéo" class="header-img">
+      <h2>Rejoindre une réunion</h2>
     </div>
-    
-    <form [formGroup]="meetingForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="meetingName">Nom de la réunion</label>
-        <input type="text" id="meetingName" formControlName="meetingName" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="participants">Participants (emails séparés par des virgules)</label>
-        <textarea id="participants" formControlName="participants" required></textarea>
-      </div>
-      
-      <div class="form-group">
-        <label for="meetingLink">Lien de la réunion (facultatif)</label>
-        <input type="text" id="meetingLink" formControlName="meetingLink" placeholder="ex: https://monapp.com/reunion/12345">
-      </div>
-  
-      <button type="submit" [disabled]="!meetingForm.valid">Créer la réunion</button>
-    </form>
     
     <div class="join-meeting">
       <h3>Joindre une réunion</h3>
       <input type="text" id="joinMeetingLink" [(ngModel)]="joinMeetingLink" placeholder="Entrez le lien de la réunion">
-      <button class="join-button" (click)="joinMeeting()">Rejoindre</button>
+      <button class="join-button" (click)="joinMeeting($event)">Rejoindre</button>
     </div>
   </div>
+</section>
+

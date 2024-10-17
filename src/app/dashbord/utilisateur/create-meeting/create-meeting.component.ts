@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-create-meeting',
@@ -14,10 +16,12 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, FormsModule, Validators } 
 export class CreateMeetingComponent {
   meetingForm: FormGroup;
   joinMeetingLink: string = '';
+  joinSalonListenerAdded = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.meetingForm = this.formBuilder.group({
       meetingName: ['', Validators.required],
@@ -40,23 +44,40 @@ export class CreateMeetingComponent {
     }
   }
 
-  joinMeeting() {
+
+  joinMeeting(event: Event) {
+    event.preventDefault();  // Empêche le rechargement de la page
+
     if (this.joinMeetingLink) {
-      // Extraire l'ID de la réunion du lien et naviguer vers la page de la réunion
-      const roomId = this.extractRoomIdFromLink(this.joinMeetingLink);
-      if (roomId) {
+      // Crée une instance de URL pour extraire les paramètres de l'URL
+      const url = new URL(this.joinMeetingLink);
+      const params = new URLSearchParams(url.search);
+
+      // Extraire les paramètres que vous voulez
+      const type = params.get('type');
+      const id = params.get('id');
+      const roomId = params.get('roomId');
+      const salonNom = params.get('salonNom');
+
+      if (type && id && roomId && salonNom) {
+        // Redirection en transférant les paramètres extraits
         this.router.navigate(['/entretien'], {
           queryParams: {
-            type: 'public',
-            id: roomId,
-            roomId: roomId
+            type,
+            id,
+            roomId,
+            salonNom
           }
         });
       } else {
-        console.error('Invalid meeting link');
+        alert('Les paramètres du lien de réunion sont incomplets.');
       }
+    } else {
+      alert('Lien de réunion invalide.');
     }
   }
+
+
 
   private extractRoomIdFromLink(link: string): string | null {
     // Implémentez la logique pour extraire l'ID de la réunion du lien
@@ -64,4 +85,5 @@ export class CreateMeetingComponent {
     const match = link.match(/\/reunion\/(\w+)$/);
     return match ? match[1] : null;
   }
+
 }

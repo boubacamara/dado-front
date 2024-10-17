@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class UtilisateurService {
 
-  private url:string = 'https://192.168.1.46:8000/api/';
+  private url:string = 'https://192.168.1.7:8000/api/';
 
   private http = inject(HttpClient);
   private router = inject(Router);

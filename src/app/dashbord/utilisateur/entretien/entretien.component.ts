@@ -4,6 +4,10 @@ import { io, Socket } from 'socket.io-client';
 import Peer, { MediaConnection } from 'peerjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common'; // Import du CommonModule pour async pipe
+import { FilterPipe } from '../../../pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+
 
 interface ParticipantVideo {
   id: string;
@@ -14,7 +18,12 @@ interface ParticipantVideo {
 @Component({
   selector: 'app-entretien',
   standalone: true,
-  imports: [CommonModule], // Assure-toi d'importer CommonModule ici
+  imports: [
+    RouterLink,
+    CommonModule,
+    FormsModule,
+    FilterPipe
+  ],
   templateUrl: './entretien.component.html',
   styleUrl: './entretien.component.scss'
 })
@@ -28,6 +37,7 @@ export class EntretienComponent {
   private userId: string | null = null;
   private roomId!: number;
   salonName!: string;
+  user!: string;
   currentDate!: Date;
   private peerConnections: Map<string, RTCPeerConnection> = new Map();
   private connectionAttempts: Map<string, number> = new Map();
@@ -61,14 +71,11 @@ export class EntretienComponent {
       this.roomId = params['id'];
       this.ROOM_ID = params['roomId'];
       this.salonName = params['salonNom'];
+      this.user = params['user'];
       this.currentDate = new Date();
     });
     
     this.initializeComponent();
-  }
-
-  ngOnDestroy(): void {
-    this.closeSalon();
   }
 
   private async initializeComponent(): Promise<void> {
@@ -85,7 +92,7 @@ export class EntretienComponent {
   }
 
   private initializeSocket(): void {
-    this.socket = io('https://192.168.1.46:8000/salon');
+    this.socket = io('https://192.168.1.7:8000/salon');
     //console.log('Socket initialized');
 
     this.socket.on('user-connected', (userId: string, userName: string, userImg: string) => {
@@ -145,7 +152,7 @@ export class EntretienComponent {
   private async initializePeer(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.peer = new Peer({
-        host: '192.168.1.46',
+        host: '192.168.1.7',
         port: 8000,
         path: '/peerjs',
         secure: true,
@@ -180,7 +187,7 @@ export class EntretienComponent {
 
   private joinRoom(): void {
     const user = {
-      nom: 'dado',
+      nom: this.user,
       photo: 'photo'
     };
 
@@ -420,21 +427,21 @@ export class EntretienComponent {
    this.handleSalonClosed(); 
   }
 
+
+
   private handleSalonClosed(): void {
+
     if (this.peer && this.socket) {
-      this.peer.destroy();
       this.socket.disconnect();
     }
 
     if (this.myVideoStream) {
       this.myVideoStream.getTracks().forEach(track => track.stop());
     }
-    const user = {
-      
-    };
+ 
     const modal: any = document.querySelector(".modal-overlay");
     modal.style.display = "";
-    this.router.navigate(['connexion']);
+    this.router.navigate(['/connexion']);
   }
 
   getParticipantVideos(): ParticipantVideo[] {
@@ -449,4 +456,5 @@ export class EntretienComponent {
     const modal: any = document.querySelector(".modal-overlay");
     modal.style.display = "";
   }
+
 }

@@ -61,8 +61,8 @@
                   <td>{{ candidat?.profile?.telephone}}</td>
                   <td class="center"><a [routerLink]="['/candidat', candidat?.id, 'curriculum-vitae']" class="valign-wrapper"><i class="material-icons small"> assignment</i>Consulter</a></td>
                   <td>
-                    <button>Retenir</button>
-                    <button>Rejeter</button>
+                    <button (click)="retenir(candidat)">Retenir</button>
+                    <button (click)="rejeter(candidat)">Rejeter</button>
                   </td>
                   
                 </tr>
