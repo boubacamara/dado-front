@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MediaService {
   
-  private uri:string = 'https://192.168.1.7:8000/api/';
+  private uri:string = environment.apiUrl;
   private http = inject(HttpClient);
 
   chargerCv(file:any) {

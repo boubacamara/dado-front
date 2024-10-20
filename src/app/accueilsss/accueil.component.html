@@ -38,12 +38,12 @@
                 <div class="col s12 m6 l4" *ngFor="let offre of offres | filterPosteLieu :poste : lieu">
                     <div class="card blue-grey-text text-darken-2">
                         <div class="card-content">
-                            <span><span class="ville">{{offre?.lieu}}</span>, {{offre.createdAt | relativeTime}} </span>
+                            <span><span class="ville">{{offre?.lieu}}</span>, il ya 2 jours</span>
                             <span class="card-title">{{offre?.titre}}</span>
                             <div class="details">
-                                <span class="card-title teal lighten-5"><i class="material-icons left">business</i>{{ offre?.recruteur?.entreprise?.nom}}</span>
-                                <span class="card-title teal lighten-5"><i class="material-icons left">monetization_on</i> {{ offre?.salaire | number:'1.0-0'}} FCFA</span>
-                                <span class="card-title teal lighten-5"><i class="material-icons left">timer</i>{{ offre?.typeContrat}}</span> 
+                                <span class="card-title teal lighten-5"><i class="material-icons left">business</i> Nom d'entreprise</span>
+                                <span class="card-title teal lighten-5"><i class="material-icons left">monetization_on</i> 250 000 FCFA</span>
+                                <span class="card-title teal lighten-5"><i class="material-icons left">timer</i>Temps plein</span> 
                             </div>                           
                         </div>
                         <div class="card-action">

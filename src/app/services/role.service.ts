@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class RoleService {
 
   private http = inject(HttpClient);
 
-  private url:string = 'https://192.168.1.7:8000/api/';
+  private url:string = environment.apiUrl;
 
   recuperer(id:number) {
     return this.http.get<any[]>(this.url+`role/${id}/recuperer`);

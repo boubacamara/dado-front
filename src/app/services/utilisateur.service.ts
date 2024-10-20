@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilisateurService {
 
-  private url:string = 'https://192.168.1.7:8000/api/';
+  private url:string = environment.apiUrl;
 
   private http = inject(HttpClient);
-  private router = inject(Router);
 
   enregistrerCandidat(candidatDonnees:any){
     return this.http.post<string>(this.url+'candidat/enregistrer', candidatDonnees);

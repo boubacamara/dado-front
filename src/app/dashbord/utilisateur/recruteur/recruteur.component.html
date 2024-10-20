@@ -8,7 +8,18 @@
     </div>
 
     <div id="offres" class="col s12 l10 offset-l1">
-      <div class="col s4 offset-s8 hide-on-med-and-down">
+      <div class="col s4 hide-on-med-and-down">
+        <div class="input-field">
+          <a [routerLink]="['/entretien']" [queryParams]="{
+            type: 'public', 
+            id: 1, 
+            roomId: 'c24aafbd-f3ba-4141-ad8a-5439f2a35f75',
+            salonNom: 'recrutement', 
+            user: recruteur?.profile.nom
+        }" class="btn teal darken-4"><i class="material-icons large left">videocam</i>Conference</a>
+        </div>
+      </div>
+      <div class="col s4 offset-s4 hide-on-med-and-down">
         <div class="input-field">
           <i class="material-icons prefix">search</i>
           <input type="text" [(ngModel)] ="rechercher" placeholder="Rechercher">
@@ -61,10 +72,15 @@
                   <td>{{ candidat?.profile?.telephone}}</td>
                   <td class="center"><a [routerLink]="['/candidat', candidat?.id, 'curriculum-vitae']" class="valign-wrapper"><i class="material-icons small"> assignment</i>Consulter</a></td>
                   <td>
-                    <button (click)="retenir(candidat)">Retenir</button>
-                    <button (click)="rejeter(candidat)">Rejeter</button>
+                    @if(candidat?.UtilisateurOffres?.statut === 'attente'){
+                      <button data-target="candidatModal" (click)="recupererCandidatId(candidat.id)" class="modal-trigger btn-floating green darken-2"><i class="material-icons">done</i></button>&nbsp;
+                      <button class="btn-floating red darken-2" (click)="rejeter(candidat.id)"><i class="material-icons">cancel</i></button>
+                    }@else if(candidat?.UtilisateurOffres?.statut === 'accepter') {
+                      Candidature retenue
+                    }@else {
+                      Candidature non retenu
+                    }
                   </td>
-                  
                 </tr>
               }@empty {
                 <tr>
@@ -76,6 +92,25 @@
         </div>
         <div class="modal-footer">
           <a class="modal-close waves-effect waves-green btn-flat">Fermer</a>
+        </div>
+      </div>
+
+      <div id="candidatModal" class="modal" #accepter>
+        <div class="modal-content">
+          <div class="card-panel">
+            <form>
+              <div class="input-field">
+                <input type="text" [(ngModel)]="candidatAccepter.commentaire" name="commentaire" id="commentaire">
+                <label for="commentaire">Date et heure de l'entretien</label>
+              </div>
+              <div class="input-field">
+                <button class="btn modal-close" (click)="retenir()">Envoyer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a [href]="'/dashbord'" class="modal-close waves-effect waves-green btn-flat">Fermer</a>
         </div>
       </div>
 

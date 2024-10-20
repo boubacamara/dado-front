@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { Injectable, inject } from '@angular/core';
 
 export class EntrepriseService {
 
-  private uri:string = 'https://192.168.1.7:8000/api/';
+  private uri:string = environment.apiUrl;
   private http = inject(HttpClient);
 
   recuper(id:number) {

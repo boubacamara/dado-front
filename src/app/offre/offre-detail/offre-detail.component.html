@@ -8,53 +8,75 @@
                 <div class="card">
                     <div class="card-content">
                       <p><a routerLink="/">Retour aux résultats</a></p>
-                      <h2>Technicien éléctronique aéronautique (H/F)</h2>
+                      <h2>{{ offre?.titre }}</h2>
                       <div class="row">
                         <div class="col s12 l9">
                             <p>
-                                <a href="" class="blue-grey-text text-darken-4 ">NOM D'ENTREPRISE</a>
+                                <a href="" class="blue-grey-text text-darken-4 ">{{ offre?.recruteur?.entreprise?.nom }}</a>
                                 <span class="separateur"> . </span> 
-                                <span>Keur Massar</span>
+                                <span>{{ offre?.lieu }}</span>
                                 <span class="separateur"> . </span>
-                                <span>Il y a 3 jours</span>
+                                <span>{{ offre.createdAt | relativeTime }}</span>
                             </p>
                         </div>
-                        <div class="col s12 l3" *ngIf="utilisateur?.role?.intitule === 'candidat'">
-                            <a class="btn teal darken-4 right" (click)="postuler()"><i class="material-icons left">check</i> Postuler</a>
-                        </div>
+
+                        @if(utilisateurSRV.estConnecte()){
+                            @if (dejaPostuler) {
+                                <div class="col s12 l3" *ngIf="utilisateur?.role?.intitule === 'candidat'">
+                                    <a class="btn white teal-text text-darken-4 right" routerLink="/dashbord"><i class="material-icons left">check</i>en attente</a>
+                                </div>
+                            }@else {
+                                <div class="col s12 l3" *ngIf="utilisateur?.role?.intitule === 'candidat'">
+                                    <a class="btn teal darken-4 right" (click)="postuler()"><i class="material-icons left">check</i> Postuler</a>
+                                </div>
+                            }
+                        }@else {
+                            <div class="col s12 l3">
+                                <a class="btn teal darken-4 right" routerLink="/connexion"><i class="material-icons left">check</i>Potuler</a>
+                            </div>
+                        }
+                        
                     </div>
                     </div>
                     
                     <div class="card-image">
-                        <img src="https://cdn.pixabay.com/photo/2017/02/03/09/58/banner-2034863_1280.png" class="responsive-img" alt="bannier entreprise">
+                        @if (entrepriseMedia.type !== 'entreprise') {
+                            <img src="https://cdn.pixabay.com/photo/2017/02/03/09/58/banner-2034863_1280.png" class="responsive-img" alt="bannier entreprise">
+                        }@else {
+                            <img [src]="entrepriseMedia?.lien" height="320" class="offre-img" alt="bannier entreprise">
+                        }
                     </div>
 
                     <div class="card-content">
+                        <span class="card-title blue-grey lighten-5 autheur">Publier par: {{offre?.recruteur?.profile?.nom}} {{offre?.recruteur?.profile.prenom}}</span>
                         <h4 class="blue-grey-text text-darken-3">Description</h4>
 
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam delectus asperiores est? Quo quia libero, quaerat cumque officiis, odit eius quas nam adipisci, nostrum non! Ullam labore esse porro laboriosam quam, numquam necessitatibus harum adipisci cupiditate eius alias tempore architecto quos dolores? Ipsam voluptas magnam, porro voluptatum quas quibusdam reiciendis architecto suscipit, ab numquam aperiam temporibus eum incidunt? Illo dicta odio perferendis corrupti temporibus blanditiis inventore sit odit beatae consequatur magnam amet, sapiente, tempora mollitia quis nam error provident deserunt? Fugit non, quae vitae itaque at dolorum alias odio error. Praesentium odit id ipsa laborum sequi quas doloribus. Debitis accusantium ea libero eligendi ipsa et voluptas, est consequatur recusandae pariatur in quis! Quidem voluptate nulla odit facilis saepe molestiae natus officiis nostrum blanditiis. Quos modi quasi voluptatem mollitia voluptates error, quas porro eaque cupiditate? Obcaecati doloribus, in non debitis deserunt minima sed quis atque consequuntur, eaque perferendis alias ullam tenetur quibusdam aperiam aliquid quos, eligendi quisquam! Autem, aperiam quibusdam. Cumque ab obcaecati earum unde debitis voluptate? Reprehenderit enim, maxime quia totam velit ad voluptate commodi quae adipisci sed odio cupiditate, harum inventore dolorem eos repellendus a accusamus explicabo consequatur nemo tenetur quod. Quasi corrupti molestias deserunt blanditiis illo? Dicta id neque et totam sed omnis! Aut, expedita? Ullam perferendis repellat exercitationem, voluptas voluptates molestiae, autem voluptatem temporibus aut earum optio unde vel aspernatur? Qui ipsum obcaecati, voluptatum ab et, magnam eos repudiandae tenetur reiciendis odio quia dicta ratione atque dolorem aut fugit exercitationem. Quod, adipisci provident quasi mollitia quae praesentium aperiam amet consequuntur saepe dolorum velit ipsa, iste quo culpa possimus libero corporis accusamus necessitatibus doloremque sunt nostrum, officiis id quibusdam. Tenetur officia eius assumenda itaque modi nostrum ad cupiditate quod, eum autem quis unde dicta doloremque veniam temporibus expedita aspernatur! Facere, ratione doloribus saepe necessitatibus beatae maiores deleniti quia?</p>
+                        <p>{{ offre?.description }}</p>
 
                         <h4>Compétences requises</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit architecto perspiciatis veniam quaerat pariatur quo ipsa sint ex commodi repellat totam, eum iusto labore nemo necessitatibus ad accusantium sunt quia!</p>
+                        <p>{{ offre?.competences }}</p>
 
                         <h4>Expérience requise</h4>
-                        <p>2 ans minimum</p>
+                        <p>{{ offre?.exigences }}</p>
 
-                        <h4>Informations complémentaires</h4>
+                        <h5>Niveau d'éducation requis</h5>
+                        <p>{{ offre?.educationRequise }}</p>
+
+                        <h5>Informations complémentaires</h5>
 
                         <table class="striped">
                             <tbody>
                                 <tr>
                                     <td>Type de contrat</td>
-                                    <td>CDI Temps plein</td>
+                                    <td>{{ offre?.typeContrat | uppercase }}</td>
                                 </tr>
                                 <tr>
                                     <td>Salaraire</td>
-                                    <td>175 000 FCFA</td>
+                                    <td>{{ offre?.salaire |number: '1.0-0' }} FCFA</td>
                                 </tr>
                                 <tr>
                                     <td>Lieu </td>
-                                    <td>Keur Massar</td>
+                                    <td>{{ offre?.lieu | uppercase }}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class OffreService {
 
   private http = inject(HttpClient)
 
-  private uri:string =  'https://192.168.1.7:8000/api/';
+  private uri:string =  environment.apiUrl;
 
   enregistrerOffre(offreDonnees:any) {
     return this.http.post<any>(this.uri+'offre/enregistrer', offreDonnees)
@@ -33,8 +34,12 @@ export class OffreService {
     return this.http.put<any>(`${this.uri}offre/${id}/modifier`, offreDonnees);
   }
 
-  modifierCandidature(email: string, id: number, offre: any) {
-    return this.http.put<any>(`${this.uri}offre/${id}/modifierCandidature`, {email, offre});
+  accepterCandidature(offreId:number, candidatId:number, data:any) {
+    return this.http.put<any>(`${this.uri}candidat/${offreId}/${candidatId}/accepter`, data);
+  }
+
+  refuserCandidature(offreId:number, candidatId:number, data:any) {
+    return this.http.put<any>(`${this.uri}candidat/${offreId}/${candidatId}/refuser`, data);
   }
 
   supprimer(id:number) {
