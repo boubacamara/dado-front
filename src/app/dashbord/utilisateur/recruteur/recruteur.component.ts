@@ -80,7 +80,7 @@ export class RecruteurComponent implements OnInit, AfterViewInit{
         M.toast({html: res.msg, classes: 'rounded green darken-4'});
         setTimeout(()=> window.location.reload(), 200)
       },
-      error: (_) => console.log('Le serveur na puis répondre')
+      error: (_) => console.log(_)
     });
   }
 
