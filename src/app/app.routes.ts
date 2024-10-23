@@ -24,6 +24,7 @@ import { CreateMeetingComponent } from './dashbord/utilisateur/create-meeting/cr
 import { authGuard } from './guards/auth.guard';
 import { AfficherCurriculumComponent } from './dashbord/utilisateur/afficher-curriculum/afficher-curriculum.component';
 import { recruteurPermissionGuard } from './guards/recruteur-permission.guard';
+import { ConseilComponent } from './conseil/conseil.component';
 
 
 
@@ -36,6 +37,7 @@ export const routes: Routes = [
     {path: 'offre/:id', component: OffreDetailComponent},
     {path: 'entretien', component: EntretienComponent},
     {path: 'reunion', component: CreateMeetingComponent},
+    {path: 'conseils-carriere', component: ConseilComponent},
 
     {path: 'dashbord', canActivate: [authGuard], component: Accueil},
     {path: 'profile/ajouter', component: ProfileAjouterComponent},
